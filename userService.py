@@ -11,8 +11,7 @@ def insertUser():
 
 def findAll():
     if( empity()):
-        print("A coleção esta vazia!")
-        return
+        raise ValueError("A colecao esta vazia!")
 
     else:
         print("Usuarios atuais:")
@@ -23,7 +22,10 @@ def findByName(name):
         print("A coleção esta vazia!")
         return
   query = {"name":name}    
-  return repository.user.find(query)
+  collection = list( repository.user.find(query))
+  if len ( collection) == 0:
+      raise ValueError("Item nao encontrado")
+  return collection
 
 def empity():
   return repository.user.count_documents({}) < 1
