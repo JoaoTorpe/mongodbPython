@@ -4,17 +4,31 @@ def display():
     print("1 - Inserir usuario")
     print("2 - Listar todos os usuarios")
     print ("3 - Listar todos filtrados por nome")
+    print("4 - Deletar usuario por ID")
     print("5 - Sair")
-    return input("--->>>>")
+    return input("--->>>> ")
 
 
 value = 0
 
 while value != 5:
-    value = int( display())
+    value = int(display())
 
     match value:
         case 1:
           userService.insertUser()
-          
+        case 2:
+            try:
+             userService.findAll()
+            except ValueError as vl:
+               print("Erro: ",vl)
+        case 3:
+            print(" ")
+            try:
+             userService.findByName(input("Insira um nome: "))
+            except ValueError as vl:
+               print("Erro: ",vl)
+        case 4:           
+             userService.deleteById(input("Insira o Id: "))
+            
     

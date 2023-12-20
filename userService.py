@@ -1,5 +1,5 @@
 import repository
-
+from bson import ObjectId
 def insertUser():
     name = input("Insira um nome: ")
     age = input("Insira uma idade: ")
@@ -15,17 +15,30 @@ def findAll():
 
     else:
         print("Usuarios atuais:")
-        return repository.user.find()
+        for u in repository.user.find():
+            print(u)
+    print(" ")        
 
 def findByName(name):
   if empity():
-        print("A coleção esta vazia!")
-        return
+       raise ValueError("A colecao esta vazia!")
   query = {"name":name}    
   collection = list( repository.user.find(query))
   if len ( collection) == 0:
       raise ValueError("Item nao encontrado")
-  return collection
+  print("Usuarios que possuem nome = ",name)
+  for u in collection:
+      print(u)
+  print(" ")  
+
+def deleteById(id):
+      if empity():
+        raise ValueError("A colecao esta vazia!")
+      filter = {"_id":ObjectId(id)}
+      
+      repository.user.delete_one(filter)
+      
+
 
 def empity():
   return repository.user.count_documents({}) < 1
