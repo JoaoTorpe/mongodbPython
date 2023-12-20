@@ -5,7 +5,7 @@ def insertUser():
     age = input("Insira uma idade: ")
     langs = input("Insira suas linguagens(Separadas por espaço): ").split()
     
-    repository.user.insert_one({"name":name,"age":age,"programing languages":langs})
+    repository.user.insert_one({"name":name,"age":age,"langs":langs})
     print("Documento inserido com sucesso!")
 
 
@@ -30,6 +30,14 @@ def findByName(name):
   for u in collection:
       print(u)
   print(" ")  
+
+def updateUser(newUser,id):
+      documentId = ObjectId(id)
+      filter = {"_id":documentId}
+      newData = {"$set": {"name": newUser.get("name"), "age": newUser.get("age"),"langs":newUser.get("langs").split()}}
+      repository.user.update_one(filter,newData)
+
+
 
 def deleteById(id):
       if empity():
