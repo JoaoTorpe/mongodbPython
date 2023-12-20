@@ -40,4 +40,8 @@ while value != -1:
              }
 
              userService.updateUser(user,id)            
-    
+        case -1:
+           print("Programa encerrado!")
+        
+        case _:
+          print("Opcao invalida!")
