@@ -6,6 +6,7 @@ def display():
     print ("3 - Listar todos filtrados por nome")
     print("4 - Deletar usuario por ID")
     print("5 - Atualizar usuario")
+    print("6 - Listar todos os setores")
     print("-1 - Sair")
     return input("--->>>> ")
 
@@ -36,10 +37,12 @@ while value != -1:
              user = {
                 "name":input("Novo nome: "),
                 "age": input("Nova idade: "),
-                "langs": input("Novas linguagens (separadas por espaco): ")
+                "langs": input("Novas linguagens (separadas por espaco): ").split(),
+                "exps" : input("Insira o tempo de experiencia com cada linguagem: (Meses) ").split()
              }
-
-             userService.updateUser(user,id)            
+             userService.updateUser(user,id)    
+        case 6:
+             userService.findAllSectors()             
         case -1:
            print("Programa encerrado!")
         
