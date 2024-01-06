@@ -10,7 +10,6 @@ def display():
     print("-1 - Sair")
     return input("--->>>> ")
 
-
 value = 0
 
 while value != -1:
