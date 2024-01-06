@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 
-client = MongoClient("localhost",27017)
+client = MongoClient("mongodb:27017")
 
 db = client.dataBase
-user= db.user
+user = db.user
 sectors = db.setores

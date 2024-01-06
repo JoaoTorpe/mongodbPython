@@ -13,3 +13,13 @@ git clone https://github.com/JoaoTorpe/mongodbPython.git
 ```bash
 docker-compose up --build
 ```
+# Rodando o App
+Use o comando abaixo em outro terminal:
+```bash
+docker-compose exec app sh
+```
+
+Em seguida, inicie a aplicação:
+```bash
+python main.py
+```
