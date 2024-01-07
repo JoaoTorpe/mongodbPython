@@ -3,7 +3,7 @@ from bson import ObjectId
 def insertUser():
     name = input("Insira um nome: ")
     age = input("Insira uma idade: ")
-    sectorId = input("Id do sertor: ")
+    sector = input("sertor: ")
     langs = input("Insira suas linguagens(Separadas por espaço): ").split()
     exps = input("Insira o tempo de experiencia com cada linguagem: (Meses) ").split()
     langsDocArray = []
@@ -14,7 +14,7 @@ def insertUser():
         }
         langsDocArray.append(lang)
     
-    repository.user.insert_one({"name":name,"age":age,"sectorId":sectorId,"langs":langsDocArray})
+    repository.user.insert_one({"name":name,"age":age,"sector":sector,"langs":langsDocArray})
     print("Documento inserido com sucesso!")
 
 
@@ -29,15 +29,17 @@ def findAll():
     print(" ") 
     print(" ")  
 
-def findAllSectors():
-    if( empity()):
-        raise ValueError("A colecao esta vazia!")
-
-    else:
-        print("Setores:")
-        for s in repository.sectors.find():
-            print(s)
-    print(" ")
+def filterBySectorName(sector):
+    if empity():
+       raise ValueError("A colecao esta vazia!")
+    query = {"sector":sector}    
+    collection = list( repository.user.find(query))
+    if len ( collection) == 0:
+      raise ValueError("Item nao encontrado")
+    print("Usuarios do setor = ",sector)
+    for u in collection:
+      print(u)
+    print(" ")  
 
 def findByName(name):
   if empity():
@@ -63,7 +65,7 @@ def updateUser(newUser,id):
         }
         langsDocArray.append(lang)
 
-      newData = {"$set": {"name": newUser.get("name"), "age": newUser.get("age"),"langs":langsDocArray}}
+      newData = {"$set": {"name": newUser.get("name"), "age": newUser.get("age"),"sector":newUser.get("sector"),"langs":langsDocArray}}
       repository.user.update_one(filter,newData)
 
 
